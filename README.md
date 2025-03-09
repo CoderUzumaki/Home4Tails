@@ -44,7 +44,7 @@ It is still in development stage, and not complete yet!
    ```
 4. Start the server:
    ```sh
-   npm start
+   npm run dev
    ```
 
 ## API Endpoints
