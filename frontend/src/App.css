@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+.nav-link {
+    position: relative;
+    color: #4a5568; /* Tailwind gray-700 */
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #1a202c; /* Tailwind gray-900 */
+}
+
+/* Underline effect */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #1a202c; /* Tailwind gray-900 */
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
