@@ -1,0 +1,15 @@
+import React from 'react'
+import logo from "../assets/Home4Tails.svg";
+
+function Header() {
+  return (
+    <header className="h-16 shadow-md">
+      <div className='h-full container mx-auto flex items-center px-4'>
+        <div>
+            <img src={logo} alt="Logo" className='h-10' />
+        </div>
+      </div>
+    </header>
+  )
+}
+export default Header
