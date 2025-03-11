@@ -37,7 +37,7 @@ const Header = () => {
                         <FaUserCircle className="text-3xl text-dark-gray-400 cursor-pointer" />
                         <Link
                             to="/login"
-                            className="px-4 py-2 bg-[#ff8c42] text-white rounded-md hover:bg-[#E76F51] transition"
+                            className="px-4 py-2 bg-[#ff8c42] text-white rounded-full hover:bg-[#E76F51] transition"
                         >
                             Login
                         </Link>
