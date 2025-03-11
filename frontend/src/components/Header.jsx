@@ -20,13 +20,13 @@ const Header = () => {
 
                     {/* Nav Links */}
                     <nav className="hidden md:flex space-x-6">
-                        {["home", "about", "adopt", "donate", "volunteer"].map((item) => (
+                        {["Home", "About", "Adopt", "Donate", "Volunteer"].map((item) => (
                             <Link
                                 key={item}
-                                to={`/${item}`}
+                                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                                 className="relative text-gray-700 hover:text-gray-900 transition duration-300 group"
                             >
-                                {item.charAt(0).toUpperCase() + item.slice(1)}
+                                {item}
                                 <span className="absolute left-1/2 bottom-0 w-0 h-0.5 bg-gray-900 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
                             </Link>
                         ))}
