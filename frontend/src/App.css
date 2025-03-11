@@ -21,11 +21,10 @@
     width: 0%;
     height: 2px;
     background-color: #1a202c; /* Tailwind gray-900 */
-    transition: all 0.3s ease-in-out;
+    transition: all 0.6s ease-in-out;
     transform: translateX(-50%);
 }
 
 .nav-link:hover::after {
     width: 100%;
 }
-

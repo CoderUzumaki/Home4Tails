@@ -41,12 +41,12 @@ const SignUp = () => {
   return (
     <section id="sign-up">
         <div className='container mx-auto p-4'>
-            <div className='w-full bg-white max-w-sm p-2 py-5 mx-auto shadow-[#ff8c42] shadow-md'>
+            <div className='w-full bg-white max-w-md p-2 py-5 mx-auto shadow-[#ff8c42] shadow-md'>
                 <div className='w-20 h-20 mx-auto '>
                     <img src={SignUpIcon} alt="Sign Up" />
                 </div>
 
-                <form className='pt-6' onSubmit={handleSubmit}>
+                <form className='pt-6 flex flex-col gap-4' onSubmit={handleSubmit}>
                 <div className='grid mb-2'>
                         <label className='text-[#333333]'>Name: </label>
                         <div className='bg-slate-100 p-2 '>
