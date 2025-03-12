@@ -1,11 +1,13 @@
 import React from 'react'
 import LoginIcon from '../assets/userProfile.png'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import summaryAPI from '../common/index';
 
 const Login = () => {
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = React.useState(false);
     const [data, setData] = React.useState({
         email: "",
@@ -22,18 +24,33 @@ const Login = () => {
         });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
 
         if (!data.email || !data.password) {
             toast.error('All fields are required.', { position: "top-center" });
             return;
         }
-
-        toast.success('Logged In Successfully', { position: "top-center" });
+        try {
+            const dataResponse = await fetch(summaryAPI.Login.url, {
+                method: summaryAPI.Login.method,
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            const dataResult = await dataResponse.json();
+            if (dataResult.error) {
+                toast.error(dataResult.message, { position: "top-center" });
+                return;
+            }
+            toast.success(dataResult.message, { position: "top-center" });
+            navigate('/');
+        } catch (error) {
+            toast.error('Something went wrong!', { position: "top-center" });
+        }
     }
-
-    // console.log('login data', data)
 
   return (
     <section id="login">
@@ -85,7 +102,7 @@ const Login = () => {
                         </Link>
                     </div>
 
-                    <button type='submit' className='cursor-pointer bg-[#ff8c42] text-white w-full max-w-[150px] px-6 py-2 mx-auto block mt-6 rounded-full hover:scale-105 hover:bg-[#E76F51] transition-all'>
+                    <button type='submit' onClick={handleSubmit} className='cursor-pointer bg-[#ff8c42] text-white w-full max-w-[150px] px-6 py-2 mx-auto block mt-6 rounded-full hover:scale-105 hover:bg-[#E76F51] transition-all'>
                         Login
                     </button>
                 </form>

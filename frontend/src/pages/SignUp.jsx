@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SignUpIcon from '../assets/userProfile.png'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import summaryAPI from '../common/index';
 
 const SignUp = () => {
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = React.useState(false);
     const [data, setData] = React.useState({
         name: "",
@@ -24,10 +26,14 @@ const SignUp = () => {
         });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         if (!data.name || !data.email || !data.password || !data.confirmPassword) {
             toast.error('All fields are required.', { position: "top-center" });
+            return;
+        }
+        if (data.password.length < 8) {
+            toast.error('Password must be at least 8 characters long.', { position: "top-center" });
             return;
         }
         if (data.password !== data.confirmPassword) {
@@ -35,7 +41,24 @@ const SignUp = () => {
             return;
         }
 
-        toast.success('Signed Up Successfully', { position: "top-center" });
+        try {
+            const dataResponse = await fetch(summaryAPI.SignUp.url, {
+                method: summaryAPI.SignUp.method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            const dataResult = await dataResponse.json();
+            if (dataResult.error) {
+                toast.error(dataResult.message, { position: "top-center" });
+                return;
+            }
+            toast.success(dataResult.message, { position: "top-center" });
+            navigate('/login');
+        } catch(error) {
+            toast.error('Something went wrong!', { position: "top-center" });
+        }
     }
 
   return (
