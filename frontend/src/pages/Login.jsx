@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import LoginIcon from '../assets/userProfile.png'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import summaryAPI from '../common/index';
+import AppContext from '../context';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { fetchUserDetails } = useContext(AppContext)
+
     const [showPassword, setShowPassword] = React.useState(false);
     const [data, setData] = React.useState({
         email: "",
@@ -21,7 +24,7 @@ const Login = () => {
                 ...preve,
                 [name]: value
             }
-        });
+        })
     }
 
     const handleSubmit = async(e) => {
@@ -31,25 +34,24 @@ const Login = () => {
             toast.error('All fields are required.', { position: "top-center" });
             return;
         }
-        try {
-            const dataResponse = await fetch(summaryAPI.Login.url, {
-                method: summaryAPI.Login.method,
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            const dataResult = await dataResponse.json();
-            if (dataResult.error) {
-                toast.error(dataResult.message, { position: "top-center" });
-                return;
-            }
-            toast.success(dataResult.message, { position: "top-center" });
-            navigate('/');
-        } catch (error) {
-            toast.error('Something went wrong!', { position: "top-center" });
+        const dataResponse = await fetch(summaryAPI.Login.url, {
+            method: summaryAPI.Login.method,
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        const dataResult = await dataResponse.json();
+        if (dataResult.error) {
+            toast.error(dataResult.message, { position: "top-center" });
         }
+        if (dataResult.success) {
+            toast.success(dataResult.message, { position: "top-center" });
+            navigate('/')
+            fetchUserDetails()
+        }
+        console.log("login data", data)
     }
 
   return (
