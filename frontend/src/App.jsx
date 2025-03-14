@@ -6,8 +6,11 @@ import { Outlet } from 'react-router-dom'
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify';
 import AppContext from './context';
+import { setUserDetails } from './redux/userReducer';
+import { useDispatch } from 'react-redux';
 
 const App = () => {
+    const dispatch = useDispatch()
     const fetchUserDetails = async () => {
         const dataResponse  = await fetch(summaryAPI.CurrentUser.url, {
             method: summaryAPI.CurrentUser.method,
@@ -15,6 +18,9 @@ const App = () => {
         })
 
         const dataResult = await dataResponse.json()
+        if (dataResult.success) {
+            dispatch(setUserDetails(dataResult.data))
+        }
         console.log("User Data: ", dataResult)
     }
     useEffect(() => {
