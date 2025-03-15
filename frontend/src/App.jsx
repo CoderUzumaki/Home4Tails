@@ -34,11 +34,12 @@ const App = () => {
         }}>
         {/* Add the Header component */}
         <Header />
+        <ToastContainer />
 
         {/* Add the main content */}
         <main className='min-h-[calc(100vh-120px)]'>
-            <ToastContainer />
-            <Outlet />
+
+            <Outlet/>
         </main>
 
         {/* Add the Footer component */}

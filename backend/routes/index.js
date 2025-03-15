@@ -18,5 +18,11 @@ router.get('/user-details', authToken, userDetailsController)
 import logoutUser from '../controllers/userLogout.js'
 router.get('/logout', authToken, logoutUser)
 
+/* Admin Panel Routes */
+
+/* Admin User Controller - Get all user details for admin panel */
+import AdminUserController from '../controllers/admin/AdminUserController.js'
+router.get('/admin/users', authToken, AdminUserController) // Uses authToken middleware to verify the user
+
 
 export default router;

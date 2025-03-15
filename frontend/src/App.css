@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html, body, #root {
+    height: 100%;
+}
+
 .nav-link {
     position: relative;
     color: #4a5568; /* Tailwind gray-700 */

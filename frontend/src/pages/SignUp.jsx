@@ -63,9 +63,9 @@ const SignUp = () => {
 
   return (
     <section id="sign-up">
-        <div className='container mx-auto p-4'>
-            <div className='w-full bg-white max-w-md p-2 py-5 mx-auto shadow-[#ff8c42] shadow-md'>
-                <div className='w-20 h-20 mx-auto '>
+        <div className='container mx-auto p-4 flex items-center min-h-[calc(100vh-120px)]'>
+            <div className='w-full bg-white max-w-md p-2 py-5 mx-auto shadow-md'>
+                <div className='w-20 h-20 mx-auto flex'>
                     <img src={SignUpIcon} alt="Sign Up" />
                 </div>
 
