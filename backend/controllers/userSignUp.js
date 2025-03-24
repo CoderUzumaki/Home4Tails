@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 
 const userSignUpController = async (req, res) => {
     try {
-        const { name, email, password } = req.body
+        const { name, email, password, profilePic } = req.body
 
         const existingUser = await userModel.findOne({ email })
         if(existingUser) {
@@ -23,7 +23,8 @@ const userSignUpController = async (req, res) => {
         const userData = new userModel({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            profilePicture: profilePic
         })
 
         const savedUser = await userData.save()

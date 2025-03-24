@@ -94,7 +94,7 @@ const AdminAllVolunteers = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     userId: selectedUser._id,
-                    task: task, // The task input
+                    task: task,
                 }),
                 credentials: "include",
             });
@@ -104,7 +104,7 @@ const AdminAllVolunteers = () => {
                 fetchAllVolunteers();
                 setAction(null);
                 setSelectedUser(null);
-                setTask(''); // Clear task input
+                setTask('');
             } else {
                 console.error("Error assigning task:", result.message);
             }
@@ -118,7 +118,7 @@ const AdminAllVolunteers = () => {
         <div className='flex min-h-[calc(100vh-65px)]'>
             <AdminSidebar />
             <div className="p-4 w-full">
-                <h2 className="text-2xl font-semibold mb-4">All Volunteers</h2>
+                <h2 className="text-2xl font-semibold mb-4"> All Volunteers </h2>
 
                 {/* User Table */}
                 <div className="overflow-x-auto">
@@ -149,7 +149,7 @@ const AdminAllVolunteers = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="5" className="border p-2 text-center">No volunteers found</td>
+                                    <td colSpan="5" className="border p-2 text-center"> No volunteers found </td>
                                 </tr>
                             )}
                         </tbody>
@@ -161,7 +161,7 @@ const AdminAllVolunteers = () => {
             {action === 'edit' && selectedUser && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow-md w-96">
-                        <h3 className="text-lg font-semibold">Edit User</h3>
+                        <h3 className="text-lg font-semibold"> Edit User </h3>
 
                         <label className="block mt-2 text-sm font-medium text-gray-600">Name</label>
                         <input
@@ -182,8 +182,8 @@ const AdminAllVolunteers = () => {
                         </select>
 
                         <div className="flex justify-end mt-4">
-                            <button onClick={() => handleEditUser()} className="bg-green-500 text-white px-4 py-2 rounded mr-2">Save</button>
-                            <button onClick={() => setAction(null)} className="bg-gray-400 px-4 py-2 rounded">Cancel</button>
+                            <button onClick={() => handleEditUser()} className="bg-green-500 text-white px-4 py-2 rounded mr-2"> Save </button>
+                            <button onClick={() => setAction(null)} className="bg-gray-400 px-4 py-2 rounded"> Cancel </button>
                         </div>
                     </div>
                 </div>
@@ -193,9 +193,9 @@ const AdminAllVolunteers = () => {
             {action === 'remove' && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow-md">
-                        <p>Are you sure you want to remove {selectedUser?.name}?</p>
+                        <p> Are you sure you want to remove {selectedUser?.name}? </p>
                         <button onClick={() => handleRemoveUser()} className="bg-red-500 text-white px-4 py-2 rounded mt-2">Remove</button>
-                        <button onClick={() => setAction(null)} className="bg-gray-400 px-4 py-2 rounded ml-2">Cancel</button>
+                        <button onClick={() => setAction(null)} className="bg-gray-400 px-4 py-2 rounded ml-2"> Cancel </button>
                     </div>
                 </div>
             )}
@@ -204,9 +204,9 @@ const AdminAllVolunteers = () => {
             {action === 'assign' && selectedUser && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow-md w-96">
-                        <h3 className="text-lg font-semibold">Assign Task to {selectedUser.name}</h3>
+                        <h3 className="text-lg font-semibold"> Assign Task to {selectedUser.name} </h3>
 
-                        <label className="block mt-2 text-sm font-medium text-gray-600">Task</label>
+                        <label className="block mt-2 text-sm font-medium text-gray-600"> Task </label>
                         <input
                             type="text"
                             className="border p-2 mt-1 w-full"

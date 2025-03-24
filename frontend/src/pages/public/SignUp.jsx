@@ -1,9 +1,10 @@
 import React from 'react'
-import SignUpIcon from '../../assets/userProfile.png'
+import SignUpIcon from '../../assets/signin.gif'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom';
+import imageTobase64 from '../../helpers/imageTobase64';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 import summaryAPI from '../../common/index';
 
 const SignUp = () => {
@@ -14,6 +15,7 @@ const SignUp = () => {
         email: "",
         password: "",
         confirmPassword: "",
+        profilePic: "",
     });
 
     const handleChange = (e) => {
@@ -25,6 +27,20 @@ const SignUp = () => {
             }
         });
     }
+
+    const handleUploadPic = async(e) =>{
+        const file = e.target.files[0]
+
+        const imagePic = await imageTobase64(file)
+
+        setData((preve)=>{
+          return{
+            ...preve,
+            profilePic : imagePic
+          }
+        })
+
+      }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -65,8 +81,18 @@ const SignUp = () => {
     <section id="sign-up">
         <div className='container mx-auto p-4 flex items-center min-h-[calc(100vh-120px)]'>
             <div className='w-full bg-white max-w-md p-2 py-5 mx-auto shadow-md'>
-                <div className='w-20 h-20 mx-auto flex'>
-                    <img src={SignUpIcon} alt="Sign Up" />
+                <div className='w-20 h-20 mx-auto relative overflow-hidden rounded-full'>
+                    <div>
+                        <img src={data.profilePic || SignUpIcon } alt='sign up icons'/>
+                    </div>
+                    <form>
+                        <label>
+                        <div className='text-xs bg-opacity-80 bg-slate-200 pb-4 pt-2 cursor-pointer text-center absolute bottom-0 w-full'>
+                            Upload  Photo
+                        </div>
+                        <input type='file' className='hidden' onChange={handleUploadPic}/>
+                        </label>
+                    </form>
                 </div>
 
                 <form className='pt-6 flex flex-col gap-4' onSubmit={handleSubmit}>
