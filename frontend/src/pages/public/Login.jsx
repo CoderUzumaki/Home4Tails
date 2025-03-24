@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import LoginIcon from '../assets/userProfile.png'
+import LoginIcon from '../../assets/userProfile.png'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import summaryAPI from '../common/index';
-import AppContext from '../context';
+import summaryAPI from '../../common/index';
+import AppContext from '../../context';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -51,7 +51,6 @@ const Login = () => {
             navigate('/')
             fetchUserDetails()
         }
-        console.log("login data", data)
     }
 
   return (

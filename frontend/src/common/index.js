@@ -1,5 +1,6 @@
 const backendDomain = 'http://localhost:8000';
 const summaryAPI = {
+    // Auth
     SignUp : {
         url : `${backendDomain}/api/sign-up`,
         method : 'POST',
@@ -19,7 +20,24 @@ const summaryAPI = {
         url : `${backendDomain}/api/logout`,
         method : 'GET',
         description: 'Logout a user',
-    }
+    },
+
+    // Admin
+    AllUsers : {
+        url : `${backendDomain}/api/admin/users`,
+        method : 'GET',
+        description: 'Get all users details',
+    },
+    EditUser : {
+        url : `${backendDomain}/api/admin/user/edit`,
+        method : 'PUT',
+        description: 'Edit a user',
+    },
+    RemoveUser : {
+        url : `${backendDomain}/api/admin/user/remove`,
+        method : 'DELETE',
+        description: 'Remove a user',
+    },
 }
 
 export default summaryAPI;

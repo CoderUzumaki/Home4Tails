@@ -7,7 +7,14 @@ import User from '../../models/userModel.js'
  */
 const AdminUserController = async (req, res) => {
   try {
-
+    console.log("All user ids: ", req.userId)
+    const users = await User.find({});
+    res.json({
+        message : "All users",
+        data : users,
+        error : false,
+        success : true
+    })
   } catch (error) {
     res.status(400).json({
         message : error.message || error,

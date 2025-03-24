@@ -24,5 +24,13 @@ router.get('/logout', authToken, logoutUser)
 import AdminUserController from '../controllers/admin/AdminUserController.js'
 router.get('/admin/users', authToken, AdminUserController) // Uses authToken middleware to verify the user
 
+/* Admin User Controller - Edit a user */
+import AdminEditUserController from '../controllers/admin/AdminEditUserController.js'
+router.put('/admin/user/edit', authToken, AdminEditUserController) // Uses authToken middleware to verify the user
+
+/* Admin User Controller - Remove a user */
+import AdminRemoveUserController from '../controllers/admin/AdminRemoveUserController.js'
+router.delete('/admin/user/remove', authToken, AdminRemoveUserController) // Uses authToken middleware to verify the user
+
 
 export default router;

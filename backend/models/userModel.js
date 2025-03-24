@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['adopter', 'donor', 'admin'],
-        default: 'adopter'
+        enum: ['user', 'volunteer', 'admin'],
+        default: 'user'
     },
     adoptedPets: [{
         type: mongoose.Schema.Types.ObjectId,

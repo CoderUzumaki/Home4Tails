@@ -1,26 +1,37 @@
 import { createBrowserRouter } from "react-router-dom";
-
-import Home from "../pages/Home";
 import App from '../App';
-import Login from '../pages/Login';
-import SignUp from '../pages/SignUp';
-import ForgotPassword from '../pages/ForgotPassword';
-import About from '../pages/About';
-import Adopt from '../pages/Adopt';
-import Donate from '../pages/Donate';
-import Volunteer from '../pages/Volunteer';
-import Admin from '../pages/AdminPanel';
-import Help from '../pages/Help&Support';
+
+// Public
+import Home from "../pages/public/Home";
+import Help from '../pages/public/Help&Support';
+
+// Auth
+import Login from '../pages/public/Login';
+import SignUp from '../pages/public/SignUp';
+import ForgotPassword from '../pages/public/ForgotPassword';
+
+// Admin
+import Admin from '../pages/admin/AdminPanel';
+import AdminAllUsers from "../pages/admin/AdminAllUsers";
+import AdminAllVolunteers from "../pages/admin/AdminAllVolunteers";
+
 
 const router = createBrowserRouter([
     {
         path : "/",
         element : <App/>,
         children : [
+            // ----- Public Routes -----
             {
                 path : "",
                 element : <Home/>
             },
+            {
+                path : "help",
+                element : <Help/>
+            },
+
+            // ----- Auth Routes -----
             {
                 path : "login",
                 element : <Login/>
@@ -33,30 +44,22 @@ const router = createBrowserRouter([
                 path : "sign-up",
                 element : <SignUp/>
             },
-            {
-                path : "about",
-                element : <div>About</div>
-            },
-            {
-                path : "adopt",
-                element : <div>Adopt</div>
-            },
-            {
-                path : "donate",
-                element : <div>Donate</div>
-            },
-            {
-                path : "volunteer",
-                element : <div>Volunteer</div>
-            },
-            {
-                path : "help",
-                element : <div>Help&Support</div>
-            },
+
+            // ----- Admin Routes -----
             {
                 path : "admin",
                 element : <Admin/>
             },
+            {
+                path : "admin/users",
+                element : <AdminAllUsers/>
+            },
+            {
+                path : "admin/volunteers",
+                element : <AdminAllVolunteers/>
+            },
+
+            // ----- 404 - NOT FOUND -----
             {
                 path : "*",
                 element : <div>Not Found</div>

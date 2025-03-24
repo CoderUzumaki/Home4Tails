@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 const authToken = async (req, res, next) => {
     try {
         const token = req.cookies?.token
-        console.log("Token: ", token)
         if(!token) {
             return res.status(200).json({
                 message: "Please Login...!",
@@ -12,9 +11,6 @@ const authToken = async (req, res, next) => {
         }
 
         jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-            console.log("Error: ", error)
-            console.log("Decoded: ", decoded)
-
             if(error) {
                 console.log("Authorization Error: ", error)
             }

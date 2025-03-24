@@ -1,10 +1,10 @@
 import React from 'react'
-import SignUpIcon from '../assets/userProfile.png'
+import SignUpIcon from '../../assets/userProfile.png'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import summaryAPI from '../common/index';
+import 'react-toastify/dist/ReactToastify.css'; 
+import summaryAPI from '../../common/index';
 
 const SignUp = () => {
     const navigate = useNavigate();
