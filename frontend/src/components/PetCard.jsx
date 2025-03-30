@@ -1,39 +1,60 @@
-import dog1 from '../assets/dog_adoption_01.jpg';
+import React from 'react';
+import { FaMars, FaVenus } from 'react-icons/fa';
 
-const ProfileCard = () => {
-    return (
-        <div className="w-full max-w-xs overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg shadow-slate-950/5">
-        <img className="m-1.5 h-max w-[calc(100%-12px)] rounded-[5px]" src={dog1} alt="profile-picture" />
-        <div className="h-max w-full rounded px-3 py-2 text-center">
-          <h5 className="font-sans text-lg font-bold text-current antialiased md:text-xl lg:text-2xl">
-            Romeo
-          </h5>
-          <p className="my-1 font-sans text-base text-slate-600 antialiased">
-            Indian Breed &amp; 2 years old
-          </p>
+const PetCard = ({ pet }) => {
+  // Add a check to handle undefined pet prop
+  if (!pet) {
+    return <div className="rounded-xl bg-white p-4 shadow-md">Pet data not available</div>;
+  }
+
+  const { name, gender, type, breed, age, image } = pet;
+
+  return (
+    <div className="overflow-hidden rounded-xl bg-white shadow-md transition-all duration-300 hover:shadow-lg sm:flex sm:h-64 sm:max-w-2xl">
+      {/* Pet Image */}
+      <div className="h-48 sm:h-auto sm:w-2/5 md:w-1/2">
+        <img
+          src={image}
+          alt={`${name} - ${breed}`}
+          className="h-full w-full object-cover"
+        />
+      </div>
+
+      {/* Pet Details */}
+      <div className="flex flex-1 flex-col justify-between p-4 sm:p-6">
+        <div>
+          <div className="flex items-center justify-between">
+            <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
+            <span className="flex items-center text-gray-600">
+              {gender === 'Male' ? (
+                <FaMars className="text-blue-500" />
+              ) : (
+                <FaVenus className="text-pink-500" />
+              )}
+            </span>
+          </div>
+
+          <div className="mt-2 space-y-1">
+            <p className="text-sm text-gray-600">
+              <span className="font-medium">Type:</span> {type}
+            </p>
+            <p className="text-sm text-gray-600">
+              <span className="font-medium">Breed:</span> {breed}
+            </p>
+            <p className="text-sm text-gray-600">
+              <span className="font-medium">Age:</span> {age} years
+            </p>
+          </div>
         </div>
-        <div className="w-full px-3.5 pt-2 pb-3.5 rounded flex items-center justify-center gap-1">
-          <button className="group inline-grid min-h-[34px] min-w-[34px] place-items-center rounded-md border border-transparent bg-transparent text-center font-sans text-sm font-medium text-slate-800 outline-none transition-all duration-300 ease-in hover:border-slate-800/5 hover:bg-slate-800/5 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            <svg className="h-3.5 w-3.5" width="1.5em" height="1.5em" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor">
-              <path d="M16.8198 20.7684L3.75317 3.96836C3.44664 3.57425 3.72749 3 4.22678 3H6.70655C6.8917 3 7.06649 3.08548 7.18016 3.23164L20.2468 20.0316C20.5534 20.4258 20.2725 21 19.7732 21H17.2935C17.1083 21 16.9335 20.9145 16.8198 20.7684Z" stroke="currentColor"></path>
-              <path d="M20 3L4 21" stroke="currentColor" strokeLinecap="round"></path>
-            </svg>
-          </button>
-          <button className="group inline-grid min-h-[34px] min-w-[34px] place-items-center rounded-md border border-transparent bg-transparent text-center font-sans text-sm font-medium text-slate-800 outline-none transition-all duration-300 ease-in hover:border-slate-800/5 hover:bg-slate-800/5 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            <svg className="h-4 w-4" width="1.5em" height="1.5em" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor">
-              <path d="M17 2H14C12.6739 2 11.4021 2.52678 10.4645 3.46447C9.52678 4.40215 9 5.67392 9 7V10H6V14H9V22H13V14H16L17 10H13V7C13 6.73478 13.1054 6.48043 13.2929 6.29289C13.4804 6.10536 13.7348 6 14 6H17V2Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
-            </svg>
-          </button>
-          <button className="group inline-grid min-h-[34px] min-w-[34px] place-items-center rounded-md border border-transparent bg-transparent text-center font-sans text-sm font-medium text-slate-800 outline-none transition-all duration-300 ease-in hover:border-slate-800/5 hover:bg-slate-800/5 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            <svg className="h-4 w-4" width="1.5em" height="1.5em" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor">
-              <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
-              <path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="currentColor"></path>
-              <path d="M17.5 6.51L17.51 6.49889" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"></path>
-            </svg>
+
+        <div className="mt-4">
+          <button className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white transition-colors duration-300 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300">
+            Adopt Me
           </button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+};
 
-export default ProfileCard;
+export default PetCard;

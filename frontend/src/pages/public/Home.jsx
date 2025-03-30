@@ -1,12 +1,17 @@
 import React from 'react'
-import PetCard from '../../components/PetCard'
-
+import ProfileCard from '../../components/PetCard'
+import dog1 from '../../assets/dogs/dog_adoption_01.jpg'
 const Home = () => {
-  return (
+return (
     <div>
-        <PetCard />
+        <ProfileCard
+            name="Buddy"
+            breed="Golden Retriever"
+            age="3 years"
+            image={dog1}
+        />
     </div>
-  )
+)
 }
 
 export default Home
