@@ -1,4 +1,4 @@
-# 🐾 Home4Tails
+# 🐾 Home4Tails (In Development)
 
 **Wander beyond, discover within – one paw at a time.**
 
@@ -6,7 +6,7 @@ Home4Tails is a web platform designed to simplify the process of pet adoption. I
 
 ---
 
-## ✨ Features (Frontend Completed)
+## ✨ Features 
 
 - 🏠 **Landing Page** – Visually appealing introduction to the platform and its mission.
 - 🐶 **Pet Listings** – Browse available pets with filters based on type, breed, size, and more.
