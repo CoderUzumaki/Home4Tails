@@ -27,7 +27,8 @@ export const AuthProvider = ({ children }) => {
             id: "123",
             name: "Demo User",
             email: "demo@home4tails.com",
-            avatar: "https://i.pravatar.cc/150?img=32",
+            gender: "male",
+            avatar: "https://i.pravatar.cc/150?img=1",
           };
           setCurrentUser(user);
           localStorage.setItem("user", JSON.stringify(user));
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const register = (name, email, password) => {
+  const register = (name, email, password, gender) => {
     // Mock registration
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -56,7 +57,10 @@ export const AuthProvider = ({ children }) => {
           id: "123",
           name,
           email,
-          avatar: "https://i.pravatar.cc/150?img=32",
+          gender,
+          avatar: gender === 'female'
+            ? "https://i.pravatar.cc/150?img=32"
+            : "https://i.pravatar.cc/150?img=1",
         };
         setCurrentUser(user);
         localStorage.setItem("user", JSON.stringify(user));
