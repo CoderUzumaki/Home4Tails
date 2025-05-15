@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+dotenv.config();
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -10,10 +12,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        trim: true,
+        lowercase: true
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'Password is required'],
+        minlength: [6, 'Password must be at least 6 characters long']
     },
     phone: {
         type: String,
@@ -83,10 +88,37 @@ UserSchema.pre("save", async function(next) {
     } catch (error) {
         next(error);
     }
-})
+});
 
-UserSchema.methods.comparePassword = async (candidatePassword) => {
+UserSchema.methods.comparePassword = async function (candidatePassword){
     return await bcrypt.compare(candidatePassword, this.password);
+};
+
+UserSchema.methods.generateAccessToken = function () {
+    return jwt.sign(
+        {
+            _id: this._id,
+            email: this.email,
+            name: this.name,
+            role: this.role,
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        },
+    )
+};
+
+userSchemsa.methods.generateRefreshToken = function () {
+    return jwt.sign(
+        {
+            _id: this._id
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        },
+    )
 };
 
 export default mongoose.model("User", UserSchema);
