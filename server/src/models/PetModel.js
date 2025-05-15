@@ -30,7 +30,7 @@ const PetSchema = new mongoose.Schema({
     },
     bio: {
         type: String,
-        default: '',
+        default: "",
         required: true
     },
     photos: [{

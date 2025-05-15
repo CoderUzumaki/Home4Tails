@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        default: '',
+        default: "",
         required: true
     },
     gender: {
@@ -33,17 +33,17 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: function() {
-            if (this.gender === 'female') {
-                return 'https://unsplash.com/illustrations/a-drawing-of-a-woman-with-long-black-hair-cx2saPh8nJY'; // Default female avatar
+            if (this.gender === "female") {
+                return "https://unsplash.com/illustrations/a-drawing-of-a-woman-with-long-black-hair-cx2saPh8nJY"; // Default female avatar
             } else {
-                return 'https://unsplash.com/illustrations/a-man-with-blonde-hair-and-a-green-shirt-E94jIKS0WK4'; // Default male avatar
+                return "https://unsplash.com/illustrations/a-man-with-blonde-hair-and-a-green-shirt-E94jIKS0WK4"; // Default male avatar
             }
         }
     },
     role: {
         type: String,
-        enum: ['user', 'volunteer', 'admin'],
-        default: 'user'
+        enum: ["user", "volunteer", "admin"],
+        default: "user"
     },
     isVerified: {
         type: Boolean,
@@ -51,11 +51,11 @@ const UserSchema = new mongoose.Schema({
     },
     favorites: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Pet'
+        ref: "Pet"
     }],
     adoptedPets: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Pet'
+        ref: "Pet"
     }],
     donations: [{
         type: mongoose.Schema.Types.Decimal128,
@@ -73,8 +73,8 @@ const UserSchema = new mongoose.Schema({
     timestamps: true
 })
 
-UserSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
+UserSchema.pre("save", async function(next) {
+    if (!this.isModified("password")) return next();
 
     try {
         const salt = await bcrypt.genSalt(10);
@@ -89,4 +89,4 @@ UserSchema.methods.comparePassword = async (candidatePassword) => {
     return await bcrypt.compare(candidatePassword, this.password);
 };
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model("User", UserSchema);

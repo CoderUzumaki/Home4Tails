@@ -47,9 +47,9 @@ const AdoptionRequestSchema = new mongoose.Schema({
   timestamps: true
 });
 
-AdoptionRequestSchema.pre('save', function(next) {
+AdoptionRequestSchema.pre("save", function(next) {
   if (!this.status) {
-    this.status = 'pending';
+    this.status = "pending";
   }
   next();
 });
