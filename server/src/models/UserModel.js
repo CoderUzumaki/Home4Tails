@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -22,8 +23,8 @@ const UserSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true,
-        unique: true
+        unique: true,
+        sparse: true
     },
     address: {
         type: String,
@@ -37,13 +38,7 @@ const UserSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: function() {
-            if (this.gender === "female") {
-                return "https://unsplash.com/illustrations/a-drawing-of-a-woman-with-long-black-hair-cx2saPh8nJY"; // Default female avatar
-            } else {
-                return "https://unsplash.com/illustrations/a-man-with-blonde-hair-and-a-green-shirt-E94jIKS0WK4"; // Default male avatar
-            }
-        }
+        required: true,
     },
     role: {
         type: String,
@@ -63,9 +58,13 @@ const UserSchema = new mongoose.Schema({
         ref: "Pet"
     }],
     donations: [{
-        type: mongoose.Schema.Types.Decimal128,
-        default: 0
+        amount: mongoose.Schema.Types.Decimal128,
+        date: { type: Date, default: Date.now },
     }],
+    refreshToken: {
+        type: String,
+        default: null
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -109,7 +108,7 @@ UserSchema.methods.generateAccessToken = function () {
     )
 };
 
-userSchemsa.methods.generateRefreshToken = function () {
+userSchema.methods.generateRefreshToken = function () {
     return jwt.sign(
         {
             _id: this._id

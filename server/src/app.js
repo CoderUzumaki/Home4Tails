@@ -15,13 +15,13 @@ const app = express();
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }))
 
 /**
  * Middleware to parse JSON data
- * @limit 16kb - tells express to limit the size of the JSON data to 16kb
+ * @limit tells express to limit the size of the JSON data to specified limit
  * @type application/json - tells express to parse only application/json data
  */
 app.use(express.json({
